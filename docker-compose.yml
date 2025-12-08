@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  db-mysql:
+    image: mysql:8.0 # Utiliza la imagen oficial de MySQL 8.0
+    container_name: pacientes_db_api
+    restart: always # Asegura que se reinicie si falla
+    environment:
+      # Credenciales y nombre de la base de datos
+      MYSQL_ROOT_PASSWORD: root_password_segura # Contraseña ROOT
+      MYSQL_DATABASE: sistemapacientes         # Nombre de la DB
+      MYSQL_USER: user                         # Usuario para la aplicación
+      MYSQL_PASSWORD: password                 # Contraseña para la aplicación
+    ports:
+      - "3307:3306" # Mapea el puerto 3306 del contenedor al puerto 3306 de tu PC
+    volumes:
+      # Ejecuta el script init.sql al crear el contenedor por primera vez
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      # Montar volumen para persistencia de datos (opcional)
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:

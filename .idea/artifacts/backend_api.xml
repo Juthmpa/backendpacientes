@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="backend_api">
+    <output-path>$PROJECT_DIR$/out/artifacts/backend_api</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="backend_api" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.mysql:mysql-connector-j:8.4.0" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.25.1" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="backend_api/web/Web" />
+    </root>
+  </artifact>
+</component>
