@@ -1,21 +1,14 @@
 package com.backend.api.dao;
 
 import com.backend.api.model.Paciente;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.backend.api.config.DatabaseConfig.getConnection;
+
 public class PacienteDAO {
-
-    // Usar el puerto 3307 de Docker y la DB 'sistemapacientes'
-    private static final String URL = "jdbc:mysql://localhost:3307/sistemapacientes";
-    private static final String USER = "user";
-    private static final String PASS = "password";
-
-    // Método auxiliar para obtener la conexión
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASS);
-    }
 
     // LISTAR TODOS (GET)
     public List<Paciente> findAll() {

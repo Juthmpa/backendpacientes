@@ -13,6 +13,8 @@ public class Medico {
         this.nombre = nombre;
         this.especialidad = especialidad;
         this.activo = activo;
+
+
     }
 
     public Long getId() {
