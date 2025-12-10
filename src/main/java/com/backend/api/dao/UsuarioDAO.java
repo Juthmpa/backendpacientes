@@ -1,4 +1,4 @@
 package com.backend.api.dao;
 
-public class ConexionDB {
+public class UsuarioDAO {
 }
