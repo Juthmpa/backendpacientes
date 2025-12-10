@@ -11,9 +11,9 @@ import java.sql.SQLException;
 public class DatabaseConfig {
 
     // Credenciales y URL de conexión definidas en el docker-compose.yml
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/pacientes_db?serverTimezone=UTC";
-    private static final String JDBC_USER = "user";
-    private static final String JDBC_PASSWORD = "password";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/sistemapacientes?serverTimezone=UTC";
+    private static final String JDBC_USER = "root";
+    private static final String JDBC_PASSWORD = "";
 
     /**
      * Proporciona una nueva conexión a la base de datos.

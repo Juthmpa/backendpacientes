@@ -14,6 +14,8 @@ public class JakartaRestConfiguration extends Application {
 
         // Registrar aquí TODOS los recursos REST
         resources.add(com.backend.api.resource.PacienteResource.class);
+        resources.add(com.backend.api.resource.UsuarioResource.class);
+
         resources.add(com.backend.api.config.CorsFilter.class);
 
 
