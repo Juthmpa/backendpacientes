@@ -131,4 +131,30 @@ public class UsuarioDAO {
         u.setActivo(rs.getBoolean("activo"));
         return u;
     }
+    /**
+     * Busca un usuario por username y password.
+     * @param username
+     * @param password
+     * @return Usuario si las credenciales son correctas y está activo, null si no lo son.
+     */
+    public Usuario buscarPorCredenciales(String username, String password) throws SQLException {
+        // IMPORTANTE: Se incluye 'AND activo = TRUE' para que solo los usuarios activos puedan iniciar sesión.
+        String sql = "SELECT * FROM usuario WHERE username = ? AND password = ? AND activo = TRUE";
+
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Reutiliza el mapeo que ya funciona
+                    return mapRow(rs);
+                }
+            }
+        }
+        return null; // Devuelve null si no se encuentra o no está activo
+    }
+
 }

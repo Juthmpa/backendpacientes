@@ -2,6 +2,7 @@ package com.backend.api.resource;
 
 import com.backend.api.dao.UsuarioDAO;
 import com.backend.api.model.Usuario;
+import com.backend.api.security.RoleRequired;
 import com.backend.api.util.ValidatorUtil;
 import com.backend.api.util.ValidationException;
 
@@ -23,6 +24,7 @@ public class UsuarioResource {
     // =========================================================================
 
     @GET
+    @RoleRequired("ADMIN")
     public Response listarTodos() {
         try {
             // CORRECCIÓN: Llamar al método listar()
@@ -41,6 +43,7 @@ public class UsuarioResource {
 
     @GET
     @Path("/{id}")
+    @RoleRequired("ADMIN")
     public Response buscarPorId(@PathParam("id") Long id) {
         try {
             // CORRECCIÓN: Llamar al método buscarPorId()
@@ -62,6 +65,7 @@ public class UsuarioResource {
     // =========================================================================
 
     @POST
+    @RoleRequired("ADMIN")
     public Response crearUsuario(Usuario usuario) {
         try {
             // --- 1. VALIDACIONES DE DATOS ---
@@ -103,6 +107,7 @@ public class UsuarioResource {
 
     @PUT
     @Path("/{id}")
+    @RoleRequired("ADMIN")
     public Response actualizarUsuario(@PathParam("id") Long id, Usuario usuario) {
         usuario.setId(id);
 

@@ -2,6 +2,7 @@ package com.backend.api.resource;
 
 import com.backend.api.dao.PacienteDAO;
 import com.backend.api.model.Paciente;
+import com.backend.api.security.RoleRequired;
 import com.backend.api.util.CedulaValidator;
 
 import jakarta.ws.rs.*;
@@ -19,6 +20,7 @@ public class PacienteResource {
 
     // 1. LISTAR TODOS (GET /api/pacientes)
     @GET
+    @RoleRequired({"ADMIN", "MEDICO"})
     public List<Paciente> listarTodos() {
         return pacienteDAO.findAll();
     }
@@ -26,6 +28,7 @@ public class PacienteResource {
     // 2. BUSCAR POR ID (GET /api/pacientes/{id})
     @GET
     @Path("/{id}")
+    @RoleRequired({"ADMIN", "MEDICO"})
     public Response buscarPorId(@PathParam("id") Long id) {
         Paciente paciente = pacienteDAO.findById(id);
         if (paciente == null) {
@@ -36,6 +39,7 @@ public class PacienteResource {
 
     // 3. CREAR PACIENTE (POST /api/pacientes)
     @POST
+    @RoleRequired({"ADMIN", "MEDICO"})
     public Response crearPaciente(Paciente paciente) {
 
         // VALIDACIÓN DE CÉDULA
@@ -66,6 +70,7 @@ public class PacienteResource {
     // 4. ACTUALIZAR PACIENTE (PUT /api/pacientes/{id})
     @PUT
     @Path("/{id}")
+    @RoleRequired({"ADMIN", "MEDICO"})
     public Response actualizarPaciente(@PathParam("id") Long id, Paciente paciente) {
         paciente.setId(id);
 
@@ -98,6 +103,7 @@ public class PacienteResource {
     // 5. CAMBIAR ESTADO (PUT /api/pacientes/{id}/status)
     @PUT
     @Path("/{id}/status")
+    @RoleRequired({"ADMIN"})
     public Response cambiarEstado(@PathParam("id") Long id, @QueryParam("activo") boolean activo) {
         try {
             pacienteDAO.updateStatus(id, activo);
