@@ -29,6 +29,12 @@
             <artifactId>jakarta.jakartaee-api</artifactId>
             <version>11.0.0-M1</version>
         </dependency>
+        <!-- validaciones -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.1.0</version> <scope>provided</scope>
+        </dependency>
 
         <!-- Driver MySQL para compilar y ejecutar JDBC -->
         <dependency>
@@ -36,6 +42,7 @@
             <artifactId>mysql-connector-j</artifactId>
             <version>8.4.0</version>
         </dependency>
+
         <dependency>
             <groupId>jakarta.xml.ws</groupId>
             <artifactId>jakarta.xml.ws-api</artifactId>
@@ -50,9 +57,6 @@
 
         <plugins>
 
-            <!-- Compilador -->
-
-
             <!-- Empaquetado WAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -62,6 +66,7 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+            <!-- Compilador -->
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>

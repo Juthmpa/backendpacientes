@@ -1,7 +1,6 @@
 package com.backend.api.model;
 
 import jakarta.validation.constraints.*;
-
 import java.io.Serializable;
 
 public class Usuario implements Serializable {
@@ -27,18 +26,23 @@ public class Usuario implements Serializable {
     // 3. VALIDACIÓN ESTRICTA PARA USERNAME (Alfanumérico seguro)
     // ----------------------------------------------------
     @NotBlank(message = "El username es obligatorio")
-    @Size(min = 4, max = 20, message = "El username debe tener entre 4 y 20 caracteres")
+    @Size(min = 4, max = 10, message = "El username debe tener entre 4 y 10 caracteres")
     // Regex: Solo letras, números, puntos, guiones y guion bajo.
     @Pattern(regexp = "^[a-zA-Z0-9._-]+$", message = "El username solo puede contener letras, números, puntos, guiones y guion bajo")
     private String username;
 
-    // ----------------------------------------------------
-    // 4. VALIDACIÓN ESTRICTA PARA PASSWORD (Mínimo 8 caracteres)
-    // ----------------------------------------------------
+    // 4. VALIDACIÓN ESTRICTA PARA PASSWORD (Mínimo 8 caracteres, complejidad media/alta)
+    // La regex siguiente fuerza:
+    // - Mínimo 8 caracteres de longitud total
+    // - Al menos una minúscula (?=.*[a-z])
+    // - Al menos una mayúscula (?=.*[A-Z])
+    // - Al menos un dígito (?=.*[0-9])
     @NotBlank(message = "La contraseña es obligatoria")
     @Size(min = 8, message = "La contraseña debe tener mínimo 8 caracteres")
-    // Puedes añadir una regex compleja para forzar letras, números y símbolos si es necesario,
-    // pero Size(8) ya es una buena base.
+    @Pattern(
+            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$",
+            message = "La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas y números."
+    )
     private String password;
 
     // ----------------------------------------------------
